@@ -83,17 +83,60 @@
 
 # root.mainloop()
 
-from tkinter import Tk
-import tkinter as ttk
+import tkinter as tk
+from tkinter import ttk
 
+# Create the main window
+root = tk.Tk()
+root.title("Student Management System")
+root.geometry("800x600")
 
-def hello_world():
-    print('hi')
+# Create a header frame
+header_frame = tk.Frame(root, bg="lightblue", height=50)
+header_frame.pack(fill=tk.X)
 
+# Header label
+header_label = tk.Label(header_frame, text="Student Records",
+                        bg="lightblue", font=("Arial", 16))
+header_label.pack(pady=10)
 
-root = Tk()
-frm = ttk.Frame(root)
-frm.grid()
-ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
-ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
+# Create a content frame to hold the grid
+content_frame = tk.Frame(root)
+content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+# Create a frame for the Treeview (grid)
+tree_frame = tk.Frame(content_frame)
+tree_frame.pack(fill=tk.BOTH, expand=True)
+
+# Create a scrollbar for the Treeview
+tree_scroll = tk.Scrollbar(tree_frame)
+tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+
+# Define the columns for the grid
+columns = ("Name", "Birthdate", "Disciplines")
+
+# Create the Treeview widget
+tree = ttk.Treeview(tree_frame, columns=columns,
+                    show="headings", yscrollcommand=tree_scroll.set)
+tree.heading("Name", text="Name")
+tree.heading("Birthdate", text="Birthdate")
+tree.heading("Disciplines", text="Disciplines")
+tree.column("Name", width=200)
+tree.column("Birthdate", width=100)
+tree.column("Disciplines", width=300)
+tree.pack(fill=tk.BOTH, expand=True)
+
+# Configure the scrollbar to work with the Treeview
+tree_scroll.config(command=tree.yview)
+
+# Example: Insert sample student data
+students = [
+    ("Alice Johnson", "2005-03-22", "Math, Science"),
+    ("Bob Smith", "2004-11-10", "English, History"),
+    ("Carol White", "2005-06-05", "Art, Physical Education")
+]
+
+for student in students:
+    tree.insert("", tk.END, values=student)
+
 root.mainloop()
