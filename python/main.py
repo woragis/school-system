@@ -134,6 +134,7 @@ students = [
     ("Alice Johnson", "2005-03-22", "Math, Science"),
     ("Bob Smith", "2004-11-10", "English, History"),
     ("Carol White", "2005-06-05", "Art, Physical Education")
+    ('Car', '2004-03-12', 'Computer Science, Calculus 1, Calculus 2')
 ]
 
 for student in students:
