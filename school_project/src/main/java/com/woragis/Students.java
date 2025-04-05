@@ -158,4 +158,28 @@ public class Students extends Vector<Student> {
         throw new Exception("Student not found");
     }
 
+    public Student searchByRGM(String rgm) throws Exception {
+        int rgmNumber = Integer.parseInt(rgm);
+        int low, high, mid, index;
+        low = 0;
+        high = 0;
+        index = -1;
+        while (low <= high) {
+            mid = low + ((high - low) / 2);
+            int thisRgm = Integer.parseInt(this.values[mid].getRgm());
+            if (thisRgm < rgmNumber) {
+                low = mid + 1;
+            } else if (thisRgm < rgmNumber) {
+                high = mid - 1;
+            } else if (thisRgm == rgmNumber) {
+                index = mid;
+            }
+        }
+        if (index != -1) {
+            return this.values[index];
+        } else {
+            throw new Error("Student not found");
+        }
+    }
+
 }
