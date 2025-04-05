@@ -2,12 +2,12 @@ package com.woragis;
 
 public class Student extends Person {
     private String rgm;
-    private LinkedList courses;
+    private LinkedList<Course> courses;
 
     public Student(String name, String rgm) {
         this.name = name;
         this.rgm = rgm;
-        this.courses = new LinkedList(null);
+        this.courses = new LinkedList<Course>(null);
     }
 
     public String getName() {

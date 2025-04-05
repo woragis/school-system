@@ -1,14 +1,14 @@
 package com.woragis;
 
-public class LinkedList {
-    private LinkedListNode head;
+public class LinkedList<T> {
+    private LinkedListNode<T> head;
 
-    public LinkedList(Course head) {
-        this.head = new LinkedListNode(head);
+    public LinkedList(T head) {
+        this.head = new LinkedListNode<T>(head);
     }
 
     public void iterateList() {
-        LinkedListNode current = this.head;
+        LinkedListNode<T> current = this.head;
         int index = 0;
         while (current != null) {
             System.out.println("Value '" + index + "': " + current.getValue());
@@ -17,8 +17,8 @@ public class LinkedList {
         }
     }
 
-    public void add(Course value) {
-        LinkedListNode newHead = new LinkedListNode(value, this.head);
+    public void add(T value) {
+        LinkedListNode<T> newHead = new LinkedListNode<T>(value, this.head);
         this.head = newHead;
     }
 
@@ -26,9 +26,9 @@ public class LinkedList {
         this.head = this.head.getNext();
     }
 
-    public void remove(Course value) {
-        LinkedListNode current = this.head;
-        LinkedListNode previous = current;
+    public void remove(T value) {
+        LinkedListNode<T> current = this.head;
+        LinkedListNode<T> previous = current;
 
         while (current != null) {
             if (current.getValue() == value) {

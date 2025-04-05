@@ -1,32 +1,32 @@
 package com.woragis;
 
-public class LinkedListNode {
-    private Course value;
-    private LinkedListNode next;
+public class LinkedListNode<T> {
+    private T value;
+    private LinkedListNode<T> next;
 
-    public LinkedListNode(Course value) {
+    public LinkedListNode(T value) {
         this.value = value;
         this.next = null;
     }
 
-    public LinkedListNode(Course value, LinkedListNode next) {
+    public LinkedListNode(T value, LinkedListNode<T> next) {
         this.value = value;
         this.next = next;
     }
 
-    public Course getValue() {
+    public T getValue() {
         return value;
     }
 
-    public LinkedListNode getNext() {
+    public LinkedListNode<T> getNext() {
         return next;
     }
 
-    public void setValue(Course value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public void setNext(LinkedListNode next) {
+    public void setNext(LinkedListNode<T> next) {
         this.next = next;
     }
 }
