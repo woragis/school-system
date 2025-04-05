@@ -1,7 +1,6 @@
 package com.woragis;
 
-public class Student {
-    private String name;
+public class Student extends Person {
     private String rgm;
 
     public Student(String name, String rgm) {
