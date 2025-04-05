@@ -1,8 +1,8 @@
 package com.woragis;
 
 public class LinkedListNode {
-    public int value;
-    public LinkedListNode next;
+    private int value;
+    private LinkedListNode next;
 
     public LinkedListNode(int value) {
         this.value = value;
@@ -20,5 +20,13 @@ public class LinkedListNode {
 
     public LinkedListNode getNext() {
         return next;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setNext(LinkedListNode next) {
+        this.next = next;
     }
 }

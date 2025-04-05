@@ -1,7 +1,7 @@
 package com.woragis;
 
 public class LinkedList {
-    public LinkedListNode head;
+    private LinkedListNode head;
 
     public LinkedList(int head) {
         this.head = new LinkedListNode(head);
@@ -11,9 +11,9 @@ public class LinkedList {
         LinkedListNode current = this.head;
         int index = 0;
         while (current != null) {
-            System.out.println("Value '" + index + "': " + current.value);
+            System.out.println("Value '" + index + "': " + current.getValue());
             index++;
-            current = current.next;
+            current = current.getNext();
         }
     }
 
@@ -23,7 +23,7 @@ public class LinkedList {
     }
 
     public void pop() {
-        this.head = this.head.next;
+        this.head = this.head.getNext();
     }
 
     public void remove(int value) {
@@ -31,12 +31,12 @@ public class LinkedList {
         LinkedListNode previous = current;
 
         while (current != null) {
-            if (current.value == value) {
-                previous.next = current.next;
+            if (current.getValue() == value) {
+                previous.setNext(current.getNext());
             } else {
                 previous = current;
             }
-            current = current.next;
+            current = current.getNext();
         }
     }
 }
