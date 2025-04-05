@@ -149,4 +149,13 @@ public class Students extends Vector<Student> {
         }
     }
 
+    public Student searchByName(String name) throws Exception {
+        for (int i = 0; i < this.size; i++) {
+            if (this.values[i].getName() == name) {
+                return this.values[i];
+            }
+        }
+        throw new Exception("Student not found");
+    }
+
 }
