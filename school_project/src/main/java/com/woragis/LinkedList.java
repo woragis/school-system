@@ -3,7 +3,7 @@ package com.woragis;
 public class LinkedList {
     private LinkedListNode head;
 
-    public LinkedList(int head) {
+    public LinkedList(Course head) {
         this.head = new LinkedListNode(head);
     }
 
@@ -17,7 +17,7 @@ public class LinkedList {
         }
     }
 
-    public void add(int value) {
+    public void add(Course value) {
         LinkedListNode newHead = new LinkedListNode(value, this.head);
         this.head = newHead;
     }
@@ -26,7 +26,7 @@ public class LinkedList {
         this.head = this.head.getNext();
     }
 
-    public void remove(int value) {
+    public void remove(Course value) {
         LinkedListNode current = this.head;
         LinkedListNode previous = current;
 

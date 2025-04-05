@@ -1,20 +1,20 @@
 package com.woragis;
 
 public class LinkedListNode {
-    private int value;
+    private Course value;
     private LinkedListNode next;
 
-    public LinkedListNode(int value) {
+    public LinkedListNode(Course value) {
         this.value = value;
         this.next = null;
     }
 
-    public LinkedListNode(int value, LinkedListNode next) {
+    public LinkedListNode(Course value, LinkedListNode next) {
         this.value = value;
         this.next = next;
     }
 
-    public int getValue() {
+    public Course getValue() {
         return value;
     }
 
@@ -22,7 +22,7 @@ public class LinkedListNode {
         return next;
     }
 
-    public void setValue(int value) {
+    public void setValue(Course value) {
         this.value = value;
     }
 
