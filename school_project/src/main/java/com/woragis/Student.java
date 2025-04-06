@@ -30,4 +30,9 @@ public class Student extends Person {
         this.courses.iterateList();
     }
 
+    @Override
+    public String toString() {
+        return "Student [name=" + name + ", rgm=" + rgm + "]";
+    }
+
 }
