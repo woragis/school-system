@@ -1,6 +1,10 @@
 package com.woragis;
 
-public class LinkedList<T> {
+import java.io.Serializable;
+
+public class LinkedList<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private LinkedListNode<T> head;
 
     public LinkedList(T head) {

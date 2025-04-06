@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class Main {
     private static int option = 0;
     private static final int SCHOOL_CAPACITY = 10;
-    private static Students school = new Students(SCHOOL_CAPACITY);
+    private static Students school = new Students("unipe", SCHOOL_CAPACITY);
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+
+        school.loadFromFile();
 
         mainloop(scanner);
 
@@ -66,6 +68,7 @@ public class Main {
                     break;
             }
             showOptions();
+            school.saveToFile();
             input = scanner.nextLine();
             option = Integer.parseInt(input);
         }

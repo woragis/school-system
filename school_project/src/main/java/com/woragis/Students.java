@@ -1,14 +1,52 @@
 package com.woragis;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class Students extends Vector<Student> {
-    public Students() {
+    private String name;
+
+    public Students(String name) {
         this.values = new Student[10];
         this.size = 0;
+        this.name = name;
     }
 
-    public Students(int capacity) {
+    public Students(String name, int capacity) {
         this.values = new Student[capacity];
         this.size = 0;
+        this.name = name;
+    }
+
+    public void saveToFile() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.name + ".bin"))) {
+            out.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFromFile() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.name + ".bin"))) {
+            Students loadedStudents = (Students) in.readObject();
+            for (int i = 0; i < loadedStudents.size; i++) {
+                try {
+                    this.add(loadedStudents.at(i));
+                } catch (Exception e) {
+                    System.out.println("Error loading saved users: " + e.getMessage());
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private Student at(int index) {
+        return this.values[index];
     }
 
     private void increaseCapacity() {
@@ -29,12 +67,23 @@ public class Students extends Vector<Student> {
         this.values = increasedVector;
     }
 
+    // private void saveAdded(Student newStudent) throws Exception {
+    // try (FileOutputStream fileOut = new FileOutputStream(this.name + ".bin");
+    // ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+    // out.writeObject(newStudent);
+    // System.out.println("Saved new student");
+    // } catch (IOException e) {
+    // System.out.println("Error saving new student: " + e.getMessage());
+    // }
+    // }
+
     @Override
     public void add(Student newStudent) throws Exception {
         if (this.size < this.values.length) {
             this.values[this.size] = newStudent;
             this.size++;
             this.order();
+            // this.saveAdded(newStudent);
         } else {
             increaseCapacity();
             this.add(newStudent);

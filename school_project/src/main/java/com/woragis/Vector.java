@@ -1,6 +1,10 @@
 package com.woragis;
 
-public class Vector<T> {
+import java.io.Serializable;
+
+public class Vector<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     protected T[] values;
     protected int size;
 
