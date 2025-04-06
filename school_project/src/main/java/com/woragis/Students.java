@@ -1,8 +1,6 @@
 package com.woragis;
 
 public class Students extends Vector<Student> {
-    boolean orderByRgm = true;
-
     public Students(int capacity) {
         this.values = new Student[capacity];
         this.size = 0;
@@ -27,9 +25,10 @@ public class Students extends Vector<Student> {
         }
     }
 
-    @Override
-    public void remove(Student student) throws Exception {
+    public void remove(String rgm) throws Exception {
         if (this.size > 0) {
+            int studentIndex = this.searchByRGM(rgm);
+            this.values[studentIndex] = null;
             this.size--;
             this.order();
         } else {
@@ -40,25 +39,13 @@ public class Students extends Vector<Student> {
     @Override
     protected void order() throws Exception {
         if (this.size > 0) {
-            if (this.orderByRgm) {
-                mergeSortByRGM(this.values, this.size);
-            } else {
-                mergeSortByName(this.values, this.size);
-            }
+            mergeSort(this.values, this.size);
         } else {
             throw new Exception("Vector is empty");
         }
     }
 
-    public void setOrderByRgm() {
-        this.orderByRgm = true;
-    }
-
-    public void setOrderByName() {
-        this.orderByRgm = false;
-    }
-
-    protected void mergeSortByName(Student[] a, int n) {
+    protected void mergeSort(Student[] a, int n) {
         if (n < 2) {
             return;
         }
@@ -72,53 +59,13 @@ public class Students extends Vector<Student> {
         for (int i = mid; i < n; i++) {
             rightSide[i - mid] = a[i];
         }
-        mergeSortByName(leftSide, mid);
-        mergeSortByName(rightSide, n - mid);
+        mergeSort(leftSide, mid);
+        mergeSort(rightSide, n - mid);
 
-        mergeByName(a, leftSide, rightSide, mid, n - mid);
+        merge(a, leftSide, rightSide, mid, n - mid);
     }
 
-    protected void mergeByName(
-            Student[] a, Student[] leftSide, Student[] rightSide, int leftPointer, int rightPointer) {
-        int i = 0, j = 0, k = 0;
-        while (i < leftPointer && j < rightPointer) {
-            int leftName = Integer.parseInt(leftSide[i].getName());
-            int rightName = Integer.parseInt(rightSide[j].getName());
-            if (leftName <= rightName) {
-                a[k++] = leftSide[i++];
-            } else {
-                a[k++] = rightSide[j++];
-            }
-        }
-        while (i < leftPointer) {
-            a[k++] = leftSide[i++];
-        }
-        while (j < rightPointer) {
-            a[k++] = rightSide[j++];
-        }
-    }
-
-    protected void mergeSortByRGM(Student[] a, int n) {
-        if (n < 2) {
-            return;
-        }
-        int mid = n / 2;
-        Student[] leftSide = new Student[mid];
-        Student[] rightSide = new Student[n - mid];
-
-        for (int i = 0; i < mid; i++) {
-            leftSide[i] = a[i];
-        }
-        for (int i = mid; i < n; i++) {
-            rightSide[i - mid] = a[i];
-        }
-        mergeSortByRGM(leftSide, mid);
-        mergeSortByRGM(rightSide, n - mid);
-
-        mergeByRGM(a, leftSide, rightSide, mid, n - mid);
-    }
-
-    protected void mergeByRGM(
+    protected void merge(
             Student[] a, Student[] leftSide, Student[] rightSide, int leftPointer, int rightPointer) {
         int i = 0, j = 0, k = 0;
         while (i < leftPointer && j < rightPointer) {
@@ -149,16 +96,7 @@ public class Students extends Vector<Student> {
         }
     }
 
-    public Student searchByName(String name) throws Exception {
-        for (int i = 0; i < this.size; i++) {
-            if (this.values[i].getName() == name) {
-                return this.values[i];
-            }
-        }
-        throw new Exception("Student not found");
-    }
-
-    public Student searchByRGM(String rgm) throws Exception {
+    public int searchByRGM(String rgm) throws Exception {
         int rgmNumber = Integer.parseInt(rgm);
         int low, high, mid, index;
         low = 0;
@@ -176,7 +114,7 @@ public class Students extends Vector<Student> {
             }
         }
         if (index != -1) {
-            return this.values[index];
+            return index;
         } else {
             throw new Error("Student not found");
         }
