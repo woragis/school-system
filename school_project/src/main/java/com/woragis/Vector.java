@@ -7,9 +7,6 @@ public class Vector<T> {
     protected void add(T newValue) throws Exception {
     }
 
-    protected void remove(T newValue) throws Exception {
-    }
-
     protected void view() throws Exception {
     }
 
