@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     private static int option = 0;
-    private static final int SCHOOL_CAPACITY = 50;
+    private static final int SCHOOL_CAPACITY = 10;
     private static Students school = new Students(SCHOOL_CAPACITY);
 
     public static void main(String[] args) {
@@ -45,11 +45,7 @@ public class Main {
                 case 3:
                     System.out.println("Pesquisando aluno...");
                     rgm = getRgm(scanner);
-                    try {
-                        school.searchByRGM(rgm);
-                    } catch (Exception e) {
-                        System.out.println("Erro ao pesquisar aluno: " + e.getMessage());
-                    }
+                    school.getStudent(rgm);
                     break;
                 case 4:
                     System.out.println("Deletando aluno...");
