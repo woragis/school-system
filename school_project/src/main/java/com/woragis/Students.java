@@ -1,12 +1,27 @@
 package com.woragis;
 
 public class Students extends Vector<Student> {
+    public Students() {
+        this.values = new Student[10];
+        this.size = 0;
+    }
+
     public Students(int capacity) {
         this.values = new Student[capacity];
         this.size = 0;
     }
 
-    public void increaseSize(int newCapacity) {
+    private void increaseCapacity() {
+        int capacity = this.values.length;
+        int newCapacity = capacity + 10;
+
+        System.out.println(
+                "Increasing school capacity from: '" + capacity + "' to: '" + newCapacity + "'");
+
+        this.increaseCapacityTo(newCapacity);
+    }
+
+    public void increaseCapacityTo(int newCapacity) {
         Student[] increasedVector = new Student[newCapacity];
         for (int i = 0; i < this.values.length; i++) {
             increasedVector[i] = this.values[i];
@@ -21,7 +36,8 @@ public class Students extends Vector<Student> {
             this.size++;
             this.order();
         } else {
-            throw new Exception("Vector is full");
+            increaseCapacity();
+            this.add(newStudent);
         }
     }
 
@@ -30,6 +46,9 @@ public class Students extends Vector<Student> {
             int studentIndex = this.searchByRGM(rgm);
             this.values[studentIndex] = null;
             this.size--;
+            if (this.size == 0) {
+                return;
+            }
             this.order();
         } else {
             throw new Exception("Vector is empty");
@@ -88,7 +107,7 @@ public class Students extends Vector<Student> {
     @Override
     protected void view() throws Exception {
         if (this.size > 0) {
-            for (int i = 0; i < values.length; i++) {
+            for (int i = 0; i < this.values.length; i++) {
                 System.out.println("Student '" + i + "': " + this.values[i]);
             }
         } else {
@@ -96,27 +115,27 @@ public class Students extends Vector<Student> {
         }
     }
 
+    public void getStudent(String rgm) {
+        try {
+            int studentIndex = this.searchByRGM(rgm);
+            Student foundStudent = this.values[studentIndex];
+            System.out.println("Found student: " + foundStudent);
+        } catch (Exception e) {
+            System.out.println("Erro ao pesquisar aluno: " + e.getMessage());
+        }
+    }
+
     public int searchByRGM(String rgm) throws Exception {
-        int rgmNumber = Integer.parseInt(rgm);
-        int low, high, mid, index;
-        low = 0;
-        high = 0;
-        index = -1;
-        while (low <= high) {
-            mid = low + ((high - low) / 2);
-            int thisRgm = Integer.parseInt(this.values[mid].getRgm());
-            if (thisRgm < rgmNumber) {
-                low = mid + 1;
-            } else if (thisRgm < rgmNumber) {
-                high = mid - 1;
-            } else if (thisRgm == rgmNumber) {
-                index = mid;
+        int index = -1;
+        for (int i = 0; i < this.size; i++) {
+            if (this.values[i].getRgm().equals(rgm)) {
+                index = i;
             }
         }
         if (index != -1) {
             return index;
         } else {
-            throw new Error("Student not found");
+            throw new Exception("Student not found");
         }
     }
 
