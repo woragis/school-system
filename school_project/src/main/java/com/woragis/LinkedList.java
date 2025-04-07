@@ -2,13 +2,13 @@ package com.woragis;
 
 import java.io.Serializable;
 
-public class LinkedList<T> implements Serializable {
+abstract class LinkedList<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private LinkedListNode<T> head;
+    protected LinkedListNode<T> head;
 
-    public LinkedList(T head) {
-        this.head = new LinkedListNode<T>(head);
+    public LinkedList() {
+        this.head = new LinkedListNode<T>(null);
     }
 
     public void iterateList() {
@@ -30,17 +30,4 @@ public class LinkedList<T> implements Serializable {
         this.head = this.head.getNext();
     }
 
-    public void remove(T value) {
-        LinkedListNode<T> current = this.head;
-        LinkedListNode<T> previous = current;
-
-        while (current != null) {
-            if (current.getValue() == value) {
-                previous.setNext(current.getNext());
-            } else {
-                previous = current;
-            }
-            current = current.getNext();
-        }
-    }
 }
