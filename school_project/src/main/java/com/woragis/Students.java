@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.woragis.abstracts.Vector;
 import com.woragis.constants.Errors;
 import com.woragis.constants.Messages;
 
