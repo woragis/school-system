@@ -1,4 +1,4 @@
-package com.woragis;
+package com.woragis.implementations;
 
 import com.woragis.abstracts.LinkedList;
 import com.woragis.abstracts.LinkedListNode;

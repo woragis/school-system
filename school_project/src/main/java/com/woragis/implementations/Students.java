@@ -1,4 +1,4 @@
-package com.woragis;
+package com.woragis.implementations;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -147,7 +147,7 @@ public class Students extends List<Student> {
     }
 
     @Override
-    protected void view() throws Exception {
+    public void view() throws Exception {
         if (this.size > 0) {
             for (int i = 0; i < this.values.length; i++) {
                 System.out.println(Messages.STUDENT + " '" + i + "': " + this.values[i]);
