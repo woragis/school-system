@@ -2,6 +2,9 @@ package com.woragis;
 
 import java.util.Scanner;
 
+import com.woragis.constants.Errors;
+import com.woragis.constants.Messages;
+
 public class Main {
     private static int option = 0;
     private static final int SCHOOL_CAPACITY = 10;
@@ -28,43 +31,43 @@ public class Main {
                 case 0:
                     break;
                 case 1:
-                    System.out.println("Mostrando alunos...");
+                    System.out.println(Messages.SHOWING_STUDENTS);
                     try {
                         school.view();
                     } catch (Exception e) {
-                        System.out.println("Erro ao tentar visualizar escola: " + e.getMessage());
+                        System.out.println(Errors.SHOWING_STUDENTS_ERROR + ": " + e.getMessage());
                     }
                     break;
                 case 2:
-                    System.out.println("Adicionando aluno...");
+                    System.out.println(Messages.ADDING_STUDENTS);
                     Student newStudent = getStudent(scanner);
                     try {
                         school.add(newStudent);
                     } catch (Exception e) {
-                        System.out.println("Erro ao tentar adicionar aluno: " + e.getMessage());
+                        System.out.println(Errors.ADDING_STUDENT_ERROR + ": " + e.getMessage());
                     }
                     break;
                 case 3:
-                    System.out.println("Pesquisando aluno...");
+                    System.out.println(Messages.SEARCHING_STUDENTS);
                     rgm = getRgm(scanner);
                     school.getStudent(rgm);
                     break;
                 case 4:
-                    System.out.println("Deletando aluno...");
+                    System.out.println(Messages.DELETING_STUDENTS);
                     rgm = getRgm(scanner);
                     try {
                         school.remove(rgm);
                     } catch (Exception e) {
-                        System.out.println("Erro ao tentar deletar aluno: " + e.getMessage());
+                        System.out.println(Errors.DELETE_STUDENT_ERROR + ": " + e.getMessage());
                     }
                     break;
                 case EXIT_OPTION:
-                    System.out.println("Saindo do programa...");
+                    System.out.println(Messages.EXITING);
                     scanner.close();
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Voce digitou um caractere invalido");
+                    System.out.println(Errors.INVALID_CHAR_ERROR);
                     break;
             }
             showOptions();
@@ -76,13 +79,11 @@ public class Main {
     }
 
     public static void showOptions() {
-        System.out.println("\n");
-        System.out.println("[0]-Mostrar opcoes");
-        System.out.println("[1]-Mostrar alunos");
-        System.out.println("[2]-Adicionar aluno");
-        System.out.println("[3]-Pesquisar aluno");
-        System.out.println("[4]-Deletar aluno");
-        System.out.println("[5]-Sair");
+        System.out.println(Messages.MAIN_OPTION_1);
+        System.out.println(Messages.MAIN_OPTION_2);
+        System.out.println(Messages.MAIN_OPTION_3);
+        System.out.println(Messages.MAIN_OPTION_4);
+        System.out.println(Messages.MAIN_OPTION_5);
     }
 
     public static void clearScreen() {
@@ -94,10 +95,10 @@ public class Main {
     }
 
     public static Student getStudent(Scanner scanner) {
-        System.out.print("Nome do aluno: ");
+        System.out.print(Messages.GET_STUDENT_NAME);
         String studentName = scanner.nextLine();
 
-        System.out.print("Rgm do aluno: ");
+        System.out.print(Messages.GET_STUDENT_RGM);
         String studentRgm = scanner.nextLine();
 
         Student newStudent = new Student(studentName, studentRgm);
@@ -106,9 +107,17 @@ public class Main {
     }
 
     public static String getRgm(Scanner scanner) {
-        System.out.print("Qual o RGM do aluno: ");
+        System.out.print(Messages.GET_STUDENT_RGM);
         String rgm = scanner.nextLine();
 
         return rgm;
+    }
+
+    public static void studentMainloop(Scanner scanner, Student student) {
+        System.out.println(Messages.STUDENT_OPTION_1);
+    }
+
+    public static void getCourse(Scanner scanner) {
+        System.out.println();
     }
 }
