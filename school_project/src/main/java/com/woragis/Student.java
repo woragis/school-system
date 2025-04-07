@@ -1,13 +1,15 @@
 package com.woragis;
 
+import com.woragis.constants.Messages;
+
 public class Student extends Person {
     private String rgm;
-    private LinkedList<Course> courses;
+    private Courses courses;
 
     public Student(String name, String rgm) {
         this.name = name;
         this.rgm = rgm;
-        this.courses = new LinkedList<Course>(null);
+        this.courses = new Courses();
     }
 
     public String getName() {
@@ -22,8 +24,8 @@ public class Student extends Person {
         this.courses.add(course);
     }
 
-    public void removeCourse(Course course) {
-        this.courses.remove(course);
+    public void removeCourse(String courseName) {
+        this.courses.remove(courseName);
     }
 
     public void getCourses() {
@@ -32,7 +34,7 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student [name=" + name + ", rgm=" + rgm + "]";
+        return Messages.STUDENT + " [nome=" + name + ", rgm=" + rgm + "]";
     }
 
 }
