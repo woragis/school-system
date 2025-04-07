@@ -1,5 +1,8 @@
 package com.woragis;
 
+import com.woragis.abstracts.LinkedList;
+import com.woragis.abstracts.LinkedListNode;
+
 public class Courses
         extends LinkedList<Course> {
     public Courses() {

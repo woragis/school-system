@@ -1,8 +1,8 @@
-package com.woragis;
+package com.woragis.abstracts;
 
 import java.io.Serializable;
 
-abstract class LinkedList<T> implements Serializable {
+public abstract class LinkedList<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected LinkedListNode<T> head;

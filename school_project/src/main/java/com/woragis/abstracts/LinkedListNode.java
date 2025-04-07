@@ -1,4 +1,4 @@
-package com.woragis;
+package com.woragis.abstracts;
 
 import java.io.Serializable;
 
