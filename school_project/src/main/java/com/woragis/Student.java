@@ -1,5 +1,6 @@
 package com.woragis;
 
+import com.woragis.abstracts.Person;
 import com.woragis.constants.Messages;
 
 public class Student extends Person {

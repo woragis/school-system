@@ -1,8 +1,8 @@
-package com.woragis;
+package com.woragis.abstracts;
 
 import java.io.Serializable;
 
-abstract class Person implements Serializable {
+public abstract class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected String name;

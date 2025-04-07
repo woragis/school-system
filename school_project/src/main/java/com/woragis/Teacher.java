@@ -1,5 +1,7 @@
 package com.woragis;
 
+import com.woragis.abstracts.Person;
+
 public class Teacher extends Person {
     public Teacher(String name) {
         this.name = name;
