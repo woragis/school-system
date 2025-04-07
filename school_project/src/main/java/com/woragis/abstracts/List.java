@@ -2,7 +2,7 @@ package com.woragis.abstracts;
 
 import java.io.Serializable;
 
-public class Vector<T> implements Serializable {
+public class List<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected T[] values;

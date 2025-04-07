@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.woragis.abstracts.Vector;
+import com.woragis.abstracts.List;
 import com.woragis.constants.Errors;
 import com.woragis.constants.Messages;
 
-public class Students extends Vector<Student> {
+public class Students extends List<Student> {
     private String name;
 
     public Students(String name) {
