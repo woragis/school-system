@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.woragis.constants.Errors;
+import com.woragis.constants.Messages;
+
 public class Students extends Vector<Student> {
     private String name;
 
@@ -36,7 +39,7 @@ public class Students extends Vector<Student> {
                 try {
                     this.add(loadedStudents.at(i));
                 } catch (Exception e) {
-                    System.out.println("Error loading saved users: " + e.getMessage());
+                    System.out.println(Errors.LOADING_ERROR + ": " + e.getMessage());
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -53,8 +56,8 @@ public class Students extends Vector<Student> {
         int capacity = this.values.length;
         int newCapacity = capacity + 10;
 
-        System.out.println(
-                "Increasing school capacity from: '" + capacity + "' to: '" + newCapacity + "'");
+        System.out.print(Messages.INCREASING_CAPACITY);
+        System.out.println("De :" + capacity + ", para: " + newCapacity);
 
         this.increaseCapacityTo(newCapacity);
     }
@@ -67,23 +70,12 @@ public class Students extends Vector<Student> {
         this.values = increasedVector;
     }
 
-    // private void saveAdded(Student newStudent) throws Exception {
-    // try (FileOutputStream fileOut = new FileOutputStream(this.name + ".bin");
-    // ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-    // out.writeObject(newStudent);
-    // System.out.println("Saved new student");
-    // } catch (IOException e) {
-    // System.out.println("Error saving new student: " + e.getMessage());
-    // }
-    // }
-
     @Override
     public void add(Student newStudent) throws Exception {
         if (this.size < this.values.length) {
             this.values[this.size] = newStudent;
             this.size++;
             this.order();
-            // this.saveAdded(newStudent);
         } else {
             increaseCapacity();
             this.add(newStudent);
@@ -100,7 +92,7 @@ public class Students extends Vector<Student> {
             }
             this.order();
         } else {
-            throw new Exception("Vector is empty");
+            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
         }
     }
 
@@ -109,7 +101,7 @@ public class Students extends Vector<Student> {
         if (this.size > 0) {
             mergeSort(this.values, this.size);
         } else {
-            throw new Exception("Vector is empty");
+            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
         }
     }
 
@@ -157,10 +149,10 @@ public class Students extends Vector<Student> {
     protected void view() throws Exception {
         if (this.size > 0) {
             for (int i = 0; i < this.values.length; i++) {
-                System.out.println("Student '" + i + "': " + this.values[i]);
+                System.out.println(Messages.STUDENT + " '" + i + "': " + this.values[i]);
             }
         } else {
-            throw new Exception("Vector is empty");
+            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
         }
     }
 
@@ -168,9 +160,9 @@ public class Students extends Vector<Student> {
         try {
             int studentIndex = this.searchByRGM(rgm);
             Student foundStudent = this.values[studentIndex];
-            System.out.println("Found student: " + foundStudent);
+            System.out.println(Messages.FOUND_STUDENT + ": " + foundStudent);
         } catch (Exception e) {
-            System.out.println("Erro ao pesquisar aluno: " + e.getMessage());
+            System.out.println(Errors.SEARCHING_STUDENT_ERROR + ": " + e.getMessage());
         }
     }
 
@@ -184,7 +176,7 @@ public class Students extends Vector<Student> {
         if (index != -1) {
             return index;
         } else {
-            throw new Exception("Student not found");
+            throw new Exception(Errors.STUDENT_NOT_FOUND);
         }
     }
 
