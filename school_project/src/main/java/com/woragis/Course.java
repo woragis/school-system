@@ -2,6 +2,8 @@ package com.woragis;
 
 import java.io.Serializable;
 
+import com.woragis.constants.Messages;
+
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -15,7 +17,15 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "Course [name=" + name + ", teacher=" + teacher + "]";
+        return Messages.COURSE + " [nome=" + name + ", professor=" + teacher + "]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
     }
 
 }

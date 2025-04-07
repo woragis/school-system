@@ -30,5 +30,6 @@ public class Messages {
     // Students Class
     public static final String INCREASING_CAPACITY = "Aumentando capacidade de armazenamento.";
     public static final String STUDENT = "Estudante";
+    public static final String COURSE = "Disciplina";
     public static final String FOUND_STUDENT = "Estudante encontrado.";
 }
