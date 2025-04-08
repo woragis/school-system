@@ -17,7 +17,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        school.loadFromFile();
+        school.carregarDeArquivo();
 
         loopPrincipal(scanner);
 
@@ -36,7 +36,7 @@ public class Main {
                 case 1:
                     System.out.println(Messages.MOSTRANDO_ESTUDANTES);
                     try {
-                        school.view();
+                        school.visualizarEstudantes();
                     } catch (Exception e) {
                         System.out.println(Errors.MOSTRANDO_ESTUDANTES_ERRO + ": " + e.getMessage());
                     }
@@ -45,7 +45,7 @@ public class Main {
                     System.out.println(Messages.ADICIONANDO_ESTUDANTE);
                     Student newStudent = pegarEstudante(scanner);
                     try {
-                        school.add(newStudent);
+                        school.adicionar(newStudent);
                     } catch (Exception e) {
                         System.out.println(Errors.ADICIONANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
@@ -54,7 +54,7 @@ public class Main {
                     System.out.println(Messages.PESQUISANDO_ESTUDANTE);
                     rgm = pegarRgm(scanner);
                     try {
-                        Student student = school.getStudent(rgm);
+                        Student student = school.pegarEstudante(rgm);
                         loopDeEstudante(scanner, student);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -64,7 +64,7 @@ public class Main {
                     System.out.println(Messages.DELETANDO_ESTUDANTE);
                     rgm = pegarRgm(scanner);
                     try {
-                        school.remove(rgm);
+                        school.removerPorRgm(rgm);
                     } catch (Exception e) {
                         System.out.println(Errors.DELETANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
@@ -79,7 +79,7 @@ public class Main {
                     break;
             }
             mostrarOpcoesPrincipais();
-            school.saveToFile();
+            school.salvarParaArquivo();
             input = scanner.nextLine();
             option = Integer.parseInt(input);
         }
@@ -151,7 +151,7 @@ public class Main {
                 case 3:
                     System.out.println(Messages.DELETANDO_ESTUDANTE_LOOP);
                     try {
-                        school.remove(student.getRgm());
+                        school.removerPorRgm(student.getRgm());
                         return;
                     } catch (Exception e) {
                         System.out.println(Errors.DELETANDO_ESTUDANTE_ERRO);

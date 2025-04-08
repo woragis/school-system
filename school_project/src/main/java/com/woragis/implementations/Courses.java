@@ -12,12 +12,12 @@ public class Courses
     }
 
     @Override
-    public void add(Course value) {
-        super.add(value);
+    public void adicionar(Course value) {
+        super.adicionar(value);
     }
 
     @Override
-    public void iterateList() {
+    public void visualizarLista() {
         LinkedListNode<Course> current = this.head;
         if (current.getValue() == null) {
             System.out.println(Errors.NENHUMA_DISCIPLINA_ERRO);
@@ -32,11 +32,11 @@ public class Courses
     }
 
     @Override
-    public void pop() {
-        super.pop();
+    public void removerUltimo() {
+        super.removerUltimo();
     }
 
-    public void remove(String courseName) {
+    public void removerEscolhido(String courseName) {
         LinkedListNode<Course> current = this.head;
         LinkedListNode<Course> previous = current;
 

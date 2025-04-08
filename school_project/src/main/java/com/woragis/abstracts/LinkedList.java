@@ -11,7 +11,7 @@ public abstract class LinkedList<T> implements Serializable {
         this.head = new LinkedListNode<T>(null);
     }
 
-    public void iterateList() {
+    public void visualizarLista() {
         LinkedListNode<T> current = this.head;
         int index = 0;
         while (current != null) {
@@ -21,12 +21,12 @@ public abstract class LinkedList<T> implements Serializable {
         }
     }
 
-    public void add(T value) {
+    public void adicionar(T value) {
         LinkedListNode<T> newHead = new LinkedListNode<T>(value, this.head);
         this.head = newHead;
     }
 
-    public void pop() {
+    public void removerUltimo() {
         this.head = this.head.getNext();
     }
 

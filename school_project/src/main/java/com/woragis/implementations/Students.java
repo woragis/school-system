@@ -25,7 +25,7 @@ public class Students extends List<Student> {
         this.name = name;
     }
 
-    public void saveToFile() {
+    public void salvarParaArquivo() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.name + ".bin"))) {
             out.writeObject(this);
         } catch (IOException e) {
@@ -33,12 +33,12 @@ public class Students extends List<Student> {
         }
     }
 
-    public void loadFromFile() {
+    public void carregarDeArquivo() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.name + ".bin"))) {
             Students loadedStudents = (Students) in.readObject();
             for (int i = 0; i < loadedStudents.size; i++) {
                 try {
-                    this.add(loadedStudents.at(i));
+                    this.adicionar(loadedStudents.at(i));
                 } catch (Exception e) {
                     System.out.println(Errors.ERRO_CARREGANDO_BACKUP + ": " + e.getMessage());
                 }
@@ -53,17 +53,17 @@ public class Students extends List<Student> {
         return this.values[index];
     }
 
-    private void increaseCapacity() {
+    private void aumentarCapacidade() {
         int capacity = this.values.length;
         int newCapacity = capacity + 10;
 
         System.out.print(Messages.AUMENTANDO_CAPACIDADE);
         System.out.println("De :" + capacity + ", para: " + newCapacity);
 
-        this.increaseCapacityTo(newCapacity);
+        this.aumentarCapacidadePara(newCapacity);
     }
 
-    public void increaseCapacityTo(int newCapacity) {
+    public void aumentarCapacidadePara(int newCapacity) {
         Student[] increasedVector = new Student[newCapacity];
         for (int i = 0; i < this.values.length; i++) {
             increasedVector[i] = this.values[i];
@@ -72,42 +72,42 @@ public class Students extends List<Student> {
     }
 
     @Override
-    public void add(Student newStudent) throws Exception {
+    public void adicionar(Student newStudent) throws Exception {
         if (this.size < this.values.length) {
             this.values[this.size] = newStudent;
             this.size++;
-            this.order();
+            this.ordenar();
         } else {
-            increaseCapacity();
-            this.add(newStudent);
+            aumentarCapacidade();
+            this.adicionar(newStudent);
         }
     }
 
-    public void remove(String rgm) throws Exception {
+    public void removerPorRgm(String rgm) throws Exception {
         if (this.size > 0) {
-            int studentIndex = this.searchByRGM(rgm);
+            int studentIndex = this.pesquisarPorRgm(rgm);
             this.values[studentIndex] = null;
             this.size--;
             if (this.size == 0) {
                 return;
             }
-            this.order();
+            this.ordenar();
         } else {
             throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }
     }
 
     @Override
-    protected void order() throws Exception {
+    protected void ordenar() throws Exception {
         if (this.size > 0) {
-            compact();
-            mergeSort(this.values, this.size);
+            compactarLista();
+            ordenacaoMerge(this.values, this.size);
         } else {
             throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }
     }
 
-    private void compact() {
+    private void compactarLista() {
         int writeIndex = 0;
         for (int readIndex = 0; readIndex < this.values.length; readIndex++) {
             if (this.values[readIndex] != null) {
@@ -121,7 +121,7 @@ public class Students extends List<Student> {
         this.size = writeIndex;
     }
 
-    protected void mergeSort(Student[] a, int n) {
+    protected void ordenacaoMerge(Student[] a, int n) {
         if (n < 2) {
             return;
         }
@@ -135,8 +135,8 @@ public class Students extends List<Student> {
         for (int i = mid; i < n; i++) {
             rightSide[i - mid] = a[i];
         }
-        mergeSort(leftSide, mid);
-        mergeSort(rightSide, n - mid);
+        ordenacaoMerge(leftSide, mid);
+        ordenacaoMerge(rightSide, n - mid);
 
         merge(a, leftSide, rightSide, mid, n - mid);
     }
@@ -162,7 +162,7 @@ public class Students extends List<Student> {
     }
 
     @Override
-    public void view() throws Exception {
+    public void visualizarEstudantes() throws Exception {
         if (this.size > 0) {
             for (int i = 0; i < this.size; i++) {
                 System.out.println(Messages.TEXTO_ESTUDANTE + " '" + i + "': " + this.values[i]);
@@ -173,9 +173,9 @@ public class Students extends List<Student> {
         }
     }
 
-    public Student getStudent(String rgm) throws Exception {
+    public Student pegarEstudante(String rgm) throws Exception {
         try {
-            int studentIndex = this.searchByRGM(rgm);
+            int studentIndex = this.pesquisarPorRgm(rgm);
             Student foundStudent = this.values[studentIndex];
             System.out.println(Messages.ESTUDANTE_ENCONTRADO + ": " + foundStudent);
             return foundStudent;
@@ -184,7 +184,7 @@ public class Students extends List<Student> {
         }
     }
 
-    public int searchByRGM(String rgm) throws Exception {
+    public int pesquisarPorRgm(String rgm) throws Exception {
         int index = -1;
         for (int i = 0; i < this.size; i++) {
             if (this.values[i].getRgm().equals(rgm)) {

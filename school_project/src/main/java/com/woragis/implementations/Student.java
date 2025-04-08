@@ -22,15 +22,15 @@ public class Student extends Person {
     }
 
     public void addCourse(Course course) {
-        this.courses.add(course);
+        this.courses.adicionar(course);
     }
 
     public void removeCourse(String courseName) {
-        this.courses.remove(courseName);
+        this.courses.removerEscolhido(courseName);
     }
 
     public void getCourses() {
-        this.courses.iterateList();
+        this.courses.visualizarLista();
     }
 
     @Override
