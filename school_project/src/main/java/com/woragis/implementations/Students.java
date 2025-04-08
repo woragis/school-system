@@ -168,6 +168,9 @@ public class Students extends List<Student> {
                 System.out.println(Messages.TEXTO_ESTUDANTE + " '" + i + "': " + this.values[i]);
             }
             System.out.println();
+            System.out.println("Tamanho utilizado: " + this.size);
+            System.out.println("Capacidade: " + this.values.length);
+            System.out.println();
         } else {
             throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }

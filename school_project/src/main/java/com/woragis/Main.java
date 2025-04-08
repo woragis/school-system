@@ -10,7 +10,7 @@ import com.woragis.implementations.Students;
 
 public class Main {
     private static int option = 0;
-    private static final int SCHOOL_CAPACITY = 10;
+    private static final int SCHOOL_CAPACITY = 60;
     private static Students school = new Students("unipe", SCHOOL_CAPACITY);
 
     public static void main(String[] args) {
@@ -46,6 +46,8 @@ public class Main {
                     Student newStudent = pegarEstudante(scanner);
                     try {
                         school.adicionar(newStudent);
+                        System.out.println("Aluno adicionado com sucesso!\n");
+                        loopDeEstudante(scanner, newStudent);
                     } catch (Exception e) {
                         System.out.println(Errors.ADICIONANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
@@ -80,8 +82,12 @@ public class Main {
             }
             mostrarOpcoesPrincipais();
             school.salvarParaArquivo();
-            input = scanner.nextLine();
-            option = Integer.parseInt(input);
+            try {
+                input = scanner.nextLine();
+                option = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println(Errors.CARACTERE_INVALIDO_ERRO);
+            }
         }
 
     }
@@ -136,8 +142,11 @@ public class Main {
         int option = 0;
 
         while (true) {
+            limparTela();
+            System.out.println("Aluno escolhido: " + student);
             switch (option) {
                 case 0:
+                    System.out.println("Mostrando disciplinas:");
                     student.getCourses();
                     break;
                 case 1:
@@ -164,8 +173,12 @@ public class Main {
                     break;
             }
             menuDeDisciplina();
-            input = scanner.nextLine();
-            option = Integer.parseInt(input);
+            try {
+                input = scanner.nextLine();
+                option = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println(Errors.CARACTERE_INVALIDO_ERRO);
+            }
         }
     }
 
