@@ -20,5 +20,6 @@ public class Errors {
     public static final String LOADING_ERROR = "Erro carregando backup";
 
     public static final String STUDENT_NOT_FOUND = "Estudante nao encontrado";
+    public static final String NO_COURSES_ERROR = "Nenhuma disciplina encontrada.";
 
 }
