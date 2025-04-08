@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.woragis.constants.Errors;
 import com.woragis.constants.Messages;
+import com.woragis.implementations.Course;
 import com.woragis.implementations.Student;
 import com.woragis.implementations.Students;
 
@@ -52,7 +53,12 @@ public class Main {
                 case 3:
                     System.out.println(Messages.SEARCHING_STUDENTS);
                     rgm = getRgm(scanner);
-                    school.getStudent(rgm);
+                    try {
+                        Student student = school.getStudent(rgm);
+                        studentMainloop(scanner, student);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 4:
                     System.out.println(Messages.DELETING_STUDENTS);
@@ -81,6 +87,7 @@ public class Main {
     }
 
     public static void showOptions() {
+        System.out.println();
         System.out.println(Messages.MAIN_OPTION_1);
         System.out.println(Messages.MAIN_OPTION_2);
         System.out.println(Messages.MAIN_OPTION_3);
@@ -115,11 +122,60 @@ public class Main {
         return rgm;
     }
 
-    public static void studentMainloop(Scanner scanner, Student student) {
+    public static void courseMenu() {
+        System.out.println();
+        System.out.println(Messages.STUDENT_OPTION_0);
         System.out.println(Messages.STUDENT_OPTION_1);
+        System.out.println(Messages.STUDENT_OPTION_2);
+        System.out.println(Messages.STUDENT_OPTION_3);
+        System.out.println(Messages.STUDENT_OPTION_4);
     }
 
-    public static void getCourse(Scanner scanner) {
-        System.out.println();
+    public static void studentMainloop(Scanner scanner, Student student) {
+        String input;
+        int option = 0;
+
+        while (true) {
+            switch (option) {
+                case 0:
+                    student.getCourses();
+                    break;
+                case 1:
+                    System.out.println(Messages.STUDENT_COURSE_ADD);
+                    Course newCourse = getCourse(scanner);
+                    student.addCourse(newCourse);
+                    break;
+                case 2:
+                    System.out.println(Messages.STUDENT_COURSE_REMOVE);
+                    break;
+                case 3:
+                    System.out.println(Messages.STUDENT_DELETE);
+                    try {
+                        school.remove(student.getRgm());
+                        return;
+                    } catch (Exception e) {
+                        System.out.println(Errors.DELETE_STUDENT_ERROR);
+                    }
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println(Errors.INVALID_CHAR_ERROR);
+                    break;
+            }
+            courseMenu();
+            input = scanner.nextLine();
+            option = Integer.parseInt(input);
+        }
+    }
+
+    public static Course getCourse(Scanner scanner) {
+        System.out.print(Messages.GET_STUDENT_COURSE_NAME);
+        String courseName = scanner.nextLine();
+
+        System.out.print(Messages.GET_STUDENT_COURSE_TEACHER);
+        String teacherName = scanner.nextLine();
+
+        return new Course(courseName, teacherName);
     }
 }

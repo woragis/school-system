@@ -19,6 +19,7 @@ public class Messages {
     public static final String MAIN_OPTION_5 = "[5]-Sair\n";
 
     // Student options
+    public static final String STUDENT_OPTION_0 = "[0]-Mostrar Materias do aluno";
     public static final String STUDENT_OPTION_1 = "[1]-Adicionar Materia";
     public static final String STUDENT_OPTION_2 = "[2]-Remover Materia";
     public static final String STUDENT_OPTION_3 = "[3]-Deletar aluno";
@@ -32,4 +33,12 @@ public class Messages {
     public static final String STUDENT = "Estudante";
     public static final String COURSE = "Disciplina";
     public static final String FOUND_STUDENT = "Estudante encontrado.";
+
+    // Student Mainloop
+    public static final String GET_STUDENT_COURSE_NAME = "Qual o nome da disciplina: ";
+    public static final String GET_STUDENT_COURSE_TEACHER = "Qual o professor da disciplina: ";
+
+    public static final String STUDENT_COURSE_ADD = "Adicionando disciplina a estudante...";
+    public static final String STUDENT_COURSE_REMOVE = "Removendo disciplina do estudante...";
+    public static final String STUDENT_DELETE = "Deletando estudante...";
 }

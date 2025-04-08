@@ -100,10 +100,25 @@ public class Students extends List<Student> {
     @Override
     protected void order() throws Exception {
         if (this.size > 0) {
+            compact();
             mergeSort(this.values, this.size);
         } else {
             throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
         }
+    }
+
+    private void compact() {
+        int writeIndex = 0;
+        for (int readIndex = 0; readIndex < this.values.length; readIndex++) {
+            if (this.values[readIndex] != null) {
+                this.values[writeIndex++] = this.values[readIndex];
+            }
+        }
+        // Fill the rest with nulls
+        for (int i = writeIndex; i < this.values.length; i++) {
+            this.values[i] = null;
+        }
+        this.size = writeIndex;
     }
 
     protected void mergeSort(Student[] a, int n) {
@@ -149,21 +164,23 @@ public class Students extends List<Student> {
     @Override
     public void view() throws Exception {
         if (this.size > 0) {
-            for (int i = 0; i < this.values.length; i++) {
+            for (int i = 0; i < this.size; i++) {
                 System.out.println(Messages.STUDENT + " '" + i + "': " + this.values[i]);
             }
+            System.out.println();
         } else {
             throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
         }
     }
 
-    public void getStudent(String rgm) {
+    public Student getStudent(String rgm) throws Exception {
         try {
             int studentIndex = this.searchByRGM(rgm);
             Student foundStudent = this.values[studentIndex];
             System.out.println(Messages.FOUND_STUDENT + ": " + foundStudent);
+            return foundStudent;
         } catch (Exception e) {
-            System.out.println(Errors.SEARCHING_STUDENT_ERROR + ": " + e.getMessage());
+            throw new Exception(Errors.SEARCHING_STUDENT_ERROR + ": " + e.getMessage());
         }
     }
 

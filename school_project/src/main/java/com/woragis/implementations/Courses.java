@@ -2,6 +2,8 @@ package com.woragis.implementations;
 
 import com.woragis.abstracts.LinkedList;
 import com.woragis.abstracts.LinkedListNode;
+import com.woragis.constants.Errors;
+import com.woragis.constants.Messages;
 
 public class Courses
         extends LinkedList<Course> {
@@ -16,7 +18,17 @@ public class Courses
 
     @Override
     public void iterateList() {
-        super.iterateList();
+        LinkedListNode<Course> current = this.head;
+        if (current.getValue() == null) {
+            System.out.println(Errors.NO_COURSES_ERROR);
+            return;
+        }
+        int index = 0;
+        while (current.getValue() != null) {
+            System.out.println(Messages.COURSE + " '" + index + "': " + current.getValue());
+            index++;
+            current = current.getNext();
+        }
     }
 
     @Override
