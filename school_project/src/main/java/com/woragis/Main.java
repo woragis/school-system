@@ -19,17 +19,17 @@ public class Main {
 
         school.loadFromFile();
 
-        mainloop(scanner);
+        loopPrincipal(scanner);
 
         scanner.close();
     }
 
-    public static void mainloop(Scanner scanner) {
+    public static void loopPrincipal(Scanner scanner) {
         String input;
         String rgm;
         final int EXIT_OPTION = 5;
         while (option != 5) {
-            clearScreen();
+            limparTela();
             switch (option) {
                 case 0:
                     break;
@@ -43,7 +43,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println(Messages.ADDING_STUDENTS);
-                    Student newStudent = getStudent(scanner);
+                    Student newStudent = pegarEstudante(scanner);
                     try {
                         school.add(newStudent);
                     } catch (Exception e) {
@@ -52,17 +52,17 @@ public class Main {
                     break;
                 case 3:
                     System.out.println(Messages.SEARCHING_STUDENTS);
-                    rgm = getRgm(scanner);
+                    rgm = pegarRgm(scanner);
                     try {
                         Student student = school.getStudent(rgm);
-                        studentMainloop(scanner, student);
+                        loopDeEstudante(scanner, student);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 4:
                     System.out.println(Messages.DELETING_STUDENTS);
-                    rgm = getRgm(scanner);
+                    rgm = pegarRgm(scanner);
                     try {
                         school.remove(rgm);
                     } catch (Exception e) {
@@ -78,7 +78,7 @@ public class Main {
                     System.out.println(Errors.INVALID_CHAR_ERROR);
                     break;
             }
-            showOptions();
+            mostrarOpcoesPrincipais();
             school.saveToFile();
             input = scanner.nextLine();
             option = Integer.parseInt(input);
@@ -86,7 +86,7 @@ public class Main {
 
     }
 
-    public static void showOptions() {
+    public static void mostrarOpcoesPrincipais() {
         System.out.println();
         System.out.println(Messages.MAIN_OPTION_1);
         System.out.println(Messages.MAIN_OPTION_2);
@@ -95,7 +95,7 @@ public class Main {
         System.out.println(Messages.MAIN_OPTION_5);
     }
 
-    public static void clearScreen() {
+    public static void limparTela() {
         try {
             new ProcessBuilder("clear").inheritIO().start().waitFor();
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -103,7 +103,7 @@ public class Main {
         }
     }
 
-    public static Student getStudent(Scanner scanner) {
+    public static Student pegarEstudante(Scanner scanner) {
         System.out.print(Messages.GET_STUDENT_NAME);
         String studentName = scanner.nextLine();
 
@@ -115,14 +115,14 @@ public class Main {
         return newStudent;
     }
 
-    public static String getRgm(Scanner scanner) {
+    public static String pegarRgm(Scanner scanner) {
         System.out.print(Messages.GET_STUDENT_RGM);
         String rgm = scanner.nextLine();
 
         return rgm;
     }
 
-    public static void courseMenu() {
+    public static void menuDeDisciplina() {
         System.out.println();
         System.out.println(Messages.STUDENT_OPTION_0);
         System.out.println(Messages.STUDENT_OPTION_1);
@@ -131,7 +131,7 @@ public class Main {
         System.out.println(Messages.STUDENT_OPTION_4);
     }
 
-    public static void studentMainloop(Scanner scanner, Student student) {
+    public static void loopDeEstudante(Scanner scanner, Student student) {
         String input;
         int option = 0;
 
@@ -142,7 +142,7 @@ public class Main {
                     break;
                 case 1:
                     System.out.println(Messages.STUDENT_COURSE_ADD);
-                    Course newCourse = getCourse(scanner);
+                    Course newCourse = pegarDisciplian(scanner);
                     student.addCourse(newCourse);
                     break;
                 case 2:
@@ -163,13 +163,13 @@ public class Main {
                     System.out.println(Errors.INVALID_CHAR_ERROR);
                     break;
             }
-            courseMenu();
+            menuDeDisciplina();
             input = scanner.nextLine();
             option = Integer.parseInt(input);
         }
     }
 
-    public static Course getCourse(Scanner scanner) {
+    public static Course pegarDisciplian(Scanner scanner) {
         System.out.print(Messages.GET_STUDENT_COURSE_NAME);
         String courseName = scanner.nextLine();
 
