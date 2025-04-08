@@ -48,6 +48,8 @@ public class Main {
                         school.adicionar(newStudent);
                         System.out.println("Aluno adicionado com sucesso!\n");
                         loopDeEstudante(scanner, newStudent);
+                        option = 1;
+                        continue;
                     } catch (Exception e) {
                         System.out.println(Errors.ADICIONANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
@@ -58,6 +60,8 @@ public class Main {
                     try {
                         Student student = school.pegarEstudante(rgm);
                         loopDeEstudante(scanner, student);
+                        option = 1;
+                        continue;
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -67,6 +71,8 @@ public class Main {
                     rgm = pegarRgm(scanner);
                     try {
                         school.removerPorRgm(rgm);
+                        option = 1;
+                        continue;
                     } catch (Exception e) {
                         System.out.println(Errors.DELETANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
