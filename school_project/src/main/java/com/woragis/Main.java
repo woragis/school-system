@@ -34,24 +34,24 @@ public class Main {
                 case 0:
                     break;
                 case 1:
-                    System.out.println(Messages.SHOWING_STUDENTS);
+                    System.out.println(Messages.MOSTRANDO_ESTUDANTES);
                     try {
                         school.view();
                     } catch (Exception e) {
-                        System.out.println(Errors.SHOWING_STUDENTS_ERROR + ": " + e.getMessage());
+                        System.out.println(Errors.MOSTRANDO_ESTUDANTES_ERRO + ": " + e.getMessage());
                     }
                     break;
                 case 2:
-                    System.out.println(Messages.ADDING_STUDENTS);
+                    System.out.println(Messages.ADICIONANDO_ESTUDANTE);
                     Student newStudent = pegarEstudante(scanner);
                     try {
                         school.add(newStudent);
                     } catch (Exception e) {
-                        System.out.println(Errors.ADDING_STUDENT_ERROR + ": " + e.getMessage());
+                        System.out.println(Errors.ADICIONANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
                     break;
                 case 3:
-                    System.out.println(Messages.SEARCHING_STUDENTS);
+                    System.out.println(Messages.PESQUISANDO_ESTUDANTE);
                     rgm = pegarRgm(scanner);
                     try {
                         Student student = school.getStudent(rgm);
@@ -61,21 +61,21 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.println(Messages.DELETING_STUDENTS);
+                    System.out.println(Messages.DELETANDO_ESTUDANTE);
                     rgm = pegarRgm(scanner);
                     try {
                         school.remove(rgm);
                     } catch (Exception e) {
-                        System.out.println(Errors.DELETE_STUDENT_ERROR + ": " + e.getMessage());
+                        System.out.println(Errors.DELETANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
                     }
                     break;
                 case EXIT_OPTION:
-                    System.out.println(Messages.EXITING);
+                    System.out.println(Messages.SAINDO);
                     scanner.close();
                     System.exit(0);
                     break;
                 default:
-                    System.out.println(Errors.INVALID_CHAR_ERROR);
+                    System.out.println(Errors.CARACTERE_INVALIDO_ERRO);
                     break;
             }
             mostrarOpcoesPrincipais();
@@ -88,11 +88,11 @@ public class Main {
 
     public static void mostrarOpcoesPrincipais() {
         System.out.println();
-        System.out.println(Messages.MAIN_OPTION_1);
-        System.out.println(Messages.MAIN_OPTION_2);
-        System.out.println(Messages.MAIN_OPTION_3);
-        System.out.println(Messages.MAIN_OPTION_4);
-        System.out.println(Messages.MAIN_OPTION_5);
+        System.out.println(Messages.OPCAO_MENU_1);
+        System.out.println(Messages.OPCAO_MENU_2);
+        System.out.println(Messages.OPCAO_MENU_3);
+        System.out.println(Messages.OPCAO_MENU_4);
+        System.out.println(Messages.OPCAO_MENU_5);
     }
 
     public static void limparTela() {
@@ -104,10 +104,10 @@ public class Main {
     }
 
     public static Student pegarEstudante(Scanner scanner) {
-        System.out.print(Messages.GET_STUDENT_NAME);
+        System.out.print(Messages.DIGITE_NOME_ALUNO);
         String studentName = scanner.nextLine();
 
-        System.out.print(Messages.GET_STUDENT_RGM);
+        System.out.print(Messages.DIGITE_RGM_ALUNO);
         String studentRgm = scanner.nextLine();
 
         Student newStudent = new Student(studentName, studentRgm);
@@ -116,7 +116,7 @@ public class Main {
     }
 
     public static String pegarRgm(Scanner scanner) {
-        System.out.print(Messages.GET_STUDENT_RGM);
+        System.out.print(Messages.DIGITE_RGM_ALUNO);
         String rgm = scanner.nextLine();
 
         return rgm;
@@ -124,11 +124,11 @@ public class Main {
 
     public static void menuDeDisciplina() {
         System.out.println();
-        System.out.println(Messages.STUDENT_OPTION_0);
-        System.out.println(Messages.STUDENT_OPTION_1);
-        System.out.println(Messages.STUDENT_OPTION_2);
-        System.out.println(Messages.STUDENT_OPTION_3);
-        System.out.println(Messages.STUDENT_OPTION_4);
+        System.out.println(Messages.OPCAO_ALUNO_0);
+        System.out.println(Messages.OPCAO_ALUNO_1);
+        System.out.println(Messages.OPCAO_ALUNO_2);
+        System.out.println(Messages.OPCAO_ALUNO_3);
+        System.out.println(Messages.OPCAO_ALUNO_4);
     }
 
     public static void loopDeEstudante(Scanner scanner, Student student) {
@@ -141,26 +141,26 @@ public class Main {
                     student.getCourses();
                     break;
                 case 1:
-                    System.out.println(Messages.STUDENT_COURSE_ADD);
+                    System.out.println(Messages.ADICIONANDO_DISCIPLINA);
                     Course newCourse = pegarDisciplian(scanner);
                     student.addCourse(newCourse);
                     break;
                 case 2:
-                    System.out.println(Messages.STUDENT_COURSE_REMOVE);
+                    System.out.println(Messages.REMOVENDO_DISCIPLINA);
                     break;
                 case 3:
-                    System.out.println(Messages.STUDENT_DELETE);
+                    System.out.println(Messages.DELETANDO_ESTUDANTE_LOOP);
                     try {
                         school.remove(student.getRgm());
                         return;
                     } catch (Exception e) {
-                        System.out.println(Errors.DELETE_STUDENT_ERROR);
+                        System.out.println(Errors.DELETANDO_ESTUDANTE_ERRO);
                     }
                     break;
                 case 4:
                     return;
                 default:
-                    System.out.println(Errors.INVALID_CHAR_ERROR);
+                    System.out.println(Errors.CARACTERE_INVALIDO_ERRO);
                     break;
             }
             menuDeDisciplina();
@@ -170,10 +170,10 @@ public class Main {
     }
 
     public static Course pegarDisciplian(Scanner scanner) {
-        System.out.print(Messages.GET_STUDENT_COURSE_NAME);
+        System.out.print(Messages.DIGITE_NOME_DISCIPLINA);
         String courseName = scanner.nextLine();
 
-        System.out.print(Messages.GET_STUDENT_COURSE_TEACHER);
+        System.out.print(Messages.DIGITE_PROFESSOR_DISCIPLINA);
         String teacherName = scanner.nextLine();
 
         return new Course(courseName, teacherName);

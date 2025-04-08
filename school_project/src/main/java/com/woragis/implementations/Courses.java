@@ -20,12 +20,12 @@ public class Courses
     public void iterateList() {
         LinkedListNode<Course> current = this.head;
         if (current.getValue() == null) {
-            System.out.println(Errors.NO_COURSES_ERROR);
+            System.out.println(Errors.NENHUMA_DISCIPLINA_ERRO);
             return;
         }
         int index = 0;
         while (current.getValue() != null) {
-            System.out.println(Messages.COURSE + " '" + index + "': " + current.getValue());
+            System.out.println(Messages.TEXTO_DISCIPLINA + " '" + index + "': " + current.getValue());
             index++;
             current = current.getNext();
         }

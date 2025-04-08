@@ -35,7 +35,7 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return Messages.STUDENT + " [nome=" + name + ", rgm=" + rgm + "]";
+        return Messages.TEXTO_ESTUDANTE + " [nome=" + name + ", rgm=" + rgm + "]";
     }
 
 }

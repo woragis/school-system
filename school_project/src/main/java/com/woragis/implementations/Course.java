@@ -17,7 +17,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return Messages.COURSE + " [nome=" + name + ", professor=" + teacher + "]";
+        return Messages.TEXTO_DISCIPLINA + " [nome=" + name + ", professor=" + teacher + "]";
     }
 
     public String getName() {

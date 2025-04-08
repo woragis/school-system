@@ -40,7 +40,7 @@ public class Students extends List<Student> {
                 try {
                     this.add(loadedStudents.at(i));
                 } catch (Exception e) {
-                    System.out.println(Errors.LOADING_ERROR + ": " + e.getMessage());
+                    System.out.println(Errors.ERRO_CARREGANDO_BACKUP + ": " + e.getMessage());
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -57,7 +57,7 @@ public class Students extends List<Student> {
         int capacity = this.values.length;
         int newCapacity = capacity + 10;
 
-        System.out.print(Messages.INCREASING_CAPACITY);
+        System.out.print(Messages.AUMENTANDO_CAPACIDADE);
         System.out.println("De :" + capacity + ", para: " + newCapacity);
 
         this.increaseCapacityTo(newCapacity);
@@ -93,7 +93,7 @@ public class Students extends List<Student> {
             }
             this.order();
         } else {
-            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
+            throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }
     }
 
@@ -103,7 +103,7 @@ public class Students extends List<Student> {
             compact();
             mergeSort(this.values, this.size);
         } else {
-            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
+            throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }
     }
 
@@ -165,11 +165,11 @@ public class Students extends List<Student> {
     public void view() throws Exception {
         if (this.size > 0) {
             for (int i = 0; i < this.size; i++) {
-                System.out.println(Messages.STUDENT + " '" + i + "': " + this.values[i]);
+                System.out.println(Messages.TEXTO_ESTUDANTE + " '" + i + "': " + this.values[i]);
             }
             System.out.println();
         } else {
-            throw new Exception(Errors.EMPTY_STUDENTS_ERROR);
+            throw new Exception(Errors.LISTA_VAZIA_ERRO);
         }
     }
 
@@ -177,10 +177,10 @@ public class Students extends List<Student> {
         try {
             int studentIndex = this.searchByRGM(rgm);
             Student foundStudent = this.values[studentIndex];
-            System.out.println(Messages.FOUND_STUDENT + ": " + foundStudent);
+            System.out.println(Messages.ESTUDANTE_ENCONTRADO + ": " + foundStudent);
             return foundStudent;
         } catch (Exception e) {
-            throw new Exception(Errors.SEARCHING_STUDENT_ERROR + ": " + e.getMessage());
+            throw new Exception(Errors.PESQUISANDO_ESTUDANTE_ERRO + ": " + e.getMessage());
         }
     }
 
@@ -194,7 +194,7 @@ public class Students extends List<Student> {
         if (index != -1) {
             return index;
         } else {
-            throw new Exception(Errors.STUDENT_NOT_FOUND);
+            throw new Exception(Errors.ESTUDANTE_NAO_ECONTRADO);
         }
     }
 
